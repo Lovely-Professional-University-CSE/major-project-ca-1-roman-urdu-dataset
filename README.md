@@ -11,11 +11,11 @@ major-project-ca-1-roman-urdu-dataset created by GitHub Classroom
 
 ## Step 5: Cleaning or data Preprocessing
 
-### Step 5.1: Tokenization
-### Step 5.2: Stemming
-### Step 5.3: Lemmatization
-### Step 5.4: POS (parts of Speech) Tagging
-### Step 5.5: Sentiment Analysis
+#### Step 5.1: Tokenization
+#### Step 5.2: Stemming
+#### Step 5.3: Lemmatization
+#### Step 5.4: POS (parts of Speech) Tagging
+#### Step 5.5: Sentiment Analysis
 
 ## Step 6: Creating vocabulary(using CountVectorizer)
 
