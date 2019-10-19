@@ -16,3 +16,7 @@ from sklearn.metrics import accuracy_score
 
 
 
+dataset = pd.read_csv('F:\Sentiment Analysis on Roman Urdu Dataset\Roman Urdu DataSet.csv', names=['Comment', 'sentiment', 'nan'])
+
+
+
