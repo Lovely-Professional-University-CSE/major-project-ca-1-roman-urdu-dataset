@@ -2,6 +2,8 @@
 ## Dateset
 The dataset consist of sentences gathered from reviews of various e-commerce website, comments on public facebook pages, and twitter accounts. Each row would ideally consist of a single sentence and have a corresponding sentiment attach to it, which would be either Negative, Positive or Neutral. There are more than 20,000 sentences and they have been manually tagged.
 
+# Step by Step approach
+
 ## Step 1: Importing all necessary modules
 
 ## Step 2: Import Dataset
