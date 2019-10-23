@@ -59,11 +59,10 @@ cv=CountVectorizer(max_features=2500)
 x=cv.fit_transform(corpus).toarray()
 x=x[:14646]
 
-
-
 print(x.shape)
 print(x)
 
-
 print(y.shape)
 print(y)
+
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.20)
