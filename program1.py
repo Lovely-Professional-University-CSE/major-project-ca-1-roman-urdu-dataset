@@ -46,6 +46,7 @@ for i in range(0, 14646):
     review = re.sub('[^a-zA-Z]',' ',dataset.iloc[:,0].values[i])
     review=review.lower()
     review=review.split()
+#stopping words
     review=[word for word in review if not word in stopwords]
     review=' '.join(review)
     corpus.append(review)
@@ -69,10 +70,18 @@ print(y)
 x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.20)
 
 #classifier  for comparing the other classifier for accuracy
-classifier=SklearnClassifier(LogisticRegression())
-log_cls=LogReg_clf.train(training_set)
 classifier=LogisticRegression(random_state=0,solver='liblinear',multi_class='ovr')
 classifier.fit(x_train,y_train)
+y_pred=classifier.predict(x_test)
+print(y_pred)
+
+
+#confusion matrix
+cm=confusion_matrix(y_test,y_pred)
+print(cm)
+
 #accuracy of LogisticRegression
+print('Accuracy is {} '.format(accuracy_score(y_test, y_pred)))
+
 
 
