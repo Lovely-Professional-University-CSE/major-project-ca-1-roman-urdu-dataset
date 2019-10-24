@@ -65,4 +65,11 @@ print(x)
 print(y.shape)
 print(y)
 
+#split the data
 x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.20)
+
+#classifier  for comparing the other classifier for accuracy
+classifier=LogisticRegression(random_state=0,solver='liblinear',multi_class='ovr')
+classifier.fit(x_train,y_train)
+classifier=LogisticRegression(random_state=0,solver='liblinear',multi_class='ovr')
+classifier.fit(x_train,y_train)
