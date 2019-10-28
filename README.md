@@ -9,7 +9,7 @@ Importing the libraries like tinker,numply,sklean,etc
 
 ## Step 2: Import Dataset
 Importing dataset taken from UCI
-https://archive.ics.uci.edu/ml/datasets/Roman+Urdu+Data+Set
+ https://archive.ics.uci.edu/ml/datasets/Roman+Urdu+Data+Set
 
 ## Step 3: Lets have a look at our data set
 Looking at the data using functions like head,colunm,row,etc.
@@ -37,5 +37,5 @@ Looking at the data using functions like head,colunm,row,etc.
 ## Step 11: Evaluation
 Checking the accuracy scorce of the classifiers.
 
-## Step 12: visualizing confusion matrix
+## Step 12: Visualizing confusion matrix
 Visualising the  matrix using the matplotlab libaray.
