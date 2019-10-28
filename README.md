@@ -5,10 +5,14 @@ The dataset consist of sentences gathered from reviews of various e-commerce web
 # Step by Step approach
 
 ## Step 1: Importing all necessary modules
+Importing the libraries like tinker,numply,sklean,etc
 
 ## Step 2: Import Dataset
+Importing dataset taken from UCI
+https://archive.ics.uci.edu/ml/datasets/Roman+Urdu+Data+Set
 
 ## Step 3: Lets have a look at our data set
+Looking at the data using functions like head,colunm,row,etc.
 
 ## Step 4: We have y in form of categorical data we need to convert it into quantitative data
 
@@ -31,5 +35,7 @@ The dataset consist of sentences gathered from reviews of various e-commerce web
 ## Step 10: Create Confusion Matrix
 
 ## Step 11: Evaluation
+Checking the accuracy scorce of the classifiers.
 
 ## Step 12: visualizing confusion matrix
+Visualising the  matrix using the matplotlab libaray.
