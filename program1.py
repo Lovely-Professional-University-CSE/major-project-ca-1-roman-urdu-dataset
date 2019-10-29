@@ -95,3 +95,15 @@ ax.set_yticklabels([''] + labels)
 plt.xlabel('Predicted')
 plt.ylabel('True')
 plt.show()
+
+# import support vector classifier 
+from sklearn.svm import SVC # "Support Vector Classifier" 
+classifier1 = SVC(kernel='linear') 
+  
+# fitting x samples and y classes 
+classifier1.fit(x, y) 
+
+y_pred1=classifier1.predict(x_test)
+print(y_pred)
+
+
