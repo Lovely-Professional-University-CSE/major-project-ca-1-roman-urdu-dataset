@@ -113,6 +113,14 @@ print(cm)
 #accuracy of LogisticRegression
 print('Accuracy is {} '.format(accuracy_score(y_test, y_pred1)))
 
-
-
-
+labels=['Positive','Neutral','Negative']
+fig = plt.figure()
+ax = fig.add_subplot(121)
+cax = ax.matshow(cm)
+plt.title('Confusion matrix of the classifier1 \n')
+fig.colorbar(cax)
+ax.set_xticklabels([''] + labels)
+ax.set_yticklabels([''] + labels)
+plt.xlabel('Predicted')
+plt.ylabel('True')
+plt.show()
