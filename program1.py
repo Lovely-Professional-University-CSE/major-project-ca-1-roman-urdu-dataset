@@ -110,9 +110,10 @@ print(y_pred)
 cm=confusion_matrix(y_test,y_pred1)
 print(cm)
 
-#accuracy of LogisticRegression
+#accuracy of SVM
 print('Accuracy is {} '.format(accuracy_score(y_test, y_pred1)))
 
+#visualizing the confusion matrix for classifer1
 labels=['Positive','Neutral','Negative']
 fig = plt.figure()
 ax = fig.add_subplot(121)
