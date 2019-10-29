@@ -106,4 +106,8 @@ classifier1.fit(x, y)
 y_pred1=classifier1.predict(x_test)
 print(y_pred)
 
+#confusion matrix
+cm=confusion_matrix(y_test,y_pred1)
+print(cm)
+
 
