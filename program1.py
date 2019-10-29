@@ -110,4 +110,9 @@ print(y_pred)
 cm=confusion_matrix(y_test,y_pred1)
 print(cm)
 
+#accuracy of LogisticRegression
+print('Accuracy is {} '.format(accuracy_score(y_test, y_pred1)))
+
+
+
 
