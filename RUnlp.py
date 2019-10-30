@@ -31,16 +31,15 @@ plt.show()
 y=dataset.iloc[:,1].values
 labelEnocder_y=LabelEncoder()
 y=labelEnocder_y.fit_transform(y)
-y=y[:14646]
-# 2 postive 0 negative 1 nuetral
+# 3 postive 1 negative 2 nuetral
 
 print(y)
 print(y.shape)
 
 corpus=[]
 stopwords=['ai', 'ayi', 'hy', 'hai', 'main', 'ki', 'tha', 'koi', 'ko', 'sy', 'woh', 'bhi', 'aur', 'wo', 'yeh', 'rha', 'hota', 'ho', 'ga', 'ka', 'le', 'lye', 'kr', 'kar', 'lye', 'liye', 'hotay', 'waisay', 'gya', 'gaya', 'kch', 'ab', 'thy', 'thay', 'houn', 'hain', 'han', 'to', 'is', 'hi', 'jo', 'kya', 'thi', 'se', 'pe', 'phr', 'wala', 'waisay', 'us', 'na', 'ny', 'hun', 'rha', 'raha', 'ja', 'rahay', 'abi', 'uski', 'ne', 'haan', 'acha', 'nai', 'sent', 'photo', 'you', 'kafi', 'gai', 'rhy', 'kuch', 'jata', 'aye', 'ya', 'dono', 'hoa', 'aese', 'de', 'wohi', 'jati', 'jb', 'krta', 'lg', 'rahi', 'hui', 'karna', 'krna', 'gi', 'hova', 'yehi', 'jana', 'jye', 'chal', 'mil', 'tu', 'hum', 'par', 'hay', 'kis', 'sb', 'gy', 'dain', 'krny', 'tou']
-for i in range(0,14646):
-    review = re.sub('[^a-zA-Z]',' ',dataset.iloc[:,0].values[i])
+for i in range(0,len(y)):
+    review = re.sub('[^a-zA-Z]',' ',str(dataset.iloc[:,0].values[i]))
     review=review.lower()
     review=review.split()
     review=[word for word in review if not word in stopwords]
@@ -52,7 +51,6 @@ corpus
 
 cv=CountVectorizer(max_features=2500)
 x=cv.fit_transform(corpus).toarray()
-x=x[:14646]
 
 cv
 
