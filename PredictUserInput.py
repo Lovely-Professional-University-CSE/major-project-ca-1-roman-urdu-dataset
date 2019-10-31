@@ -32,3 +32,8 @@ def Predict_User_Input():
 		Label(user_input_window, image=NegativeImage).grid(row = 2)
 	else:
 		Label(user_input_window, image=NeutralImage).grid(row = 2)
+Label(user_input_window, text = 'Enter your comment').grid(row = 0, column = 0)
+Input_String = StringVar()
+Entry(user_input_window, textvariable = Input_String, bd = 5).grid(row = 0, column = 1)
+Button(user_input_window, text = 'Predict Sentiment', command = Predict_User_Input).grid(row = 1, columnspan = 2)
+user_input_window.mainloop()
