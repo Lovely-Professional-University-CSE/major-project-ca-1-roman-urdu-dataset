@@ -4,8 +4,6 @@ import sys
 user_input_window = Tk()
 #from MyModel import clean, View_ConfusionMatrix, Visualize_ActualDataSet
 import pickle
-import MyModel
-
 
 clf_classifier = pickle.load(open( "classifier.sav", "rb" ))
 
@@ -21,7 +19,7 @@ NeutralImage = PhotoImage(file = 'img/neutral.gif')
 
 def Predict_User_Input():
 	user_input = Input_String.get()
-	user_input = MyModel.clean(user_input)
+	user_input = clean(user_input)
 	user_input = [user_input]
 	user_input_vector = current_vector.transform(user_input)
 	Sentiment_user_input = clf_classifier.predict(user_input_vector)
