@@ -94,17 +94,17 @@ plt.show()
 
 # import support vector classifier 
 from sklearn.svm import SVC # Support Vector Classifier
-classifier1 = SVC(kernel='linear',c=1,random_state=0) 
+classifier1 = SVC(kernel='linear',random_state=0) 
   
 # fitting x samples and y classes 
 classifier1.fit(x_train, y_train) 
 
 y_pred1=classifier1.predict(x_test)
-print(y_pred)
+print(y_pred1)
 
 #confusion matrix
-cm=confusion_matrix(y_test,y_pred1)
-print(cm)
+cm1=confusion_matrix(y_test,y_pred1)
+print(cm1)
 
 #accuracy of SVM
 print('Accuracy is {} '.format(accuracy_score(y_test, y_pred1)))
@@ -112,8 +112,8 @@ print('Accuracy is {} '.format(accuracy_score(y_test, y_pred1)))
 #visualizing the confusion matrix for classifer1
 labels=['Positive','Neutral','Negative']
 fig = plt.figure()
-ax = fig.add_subplot(121)
-cax = ax.matshow(cm)
+ax1 = fig.add_subplot(222)
+cax = ax.matshow(cm1)
 plt.title('Confusion matrix of the classifier1 \n')
 fig.colorbar(cax)
 ax.set_xticklabels([''] + labels)
