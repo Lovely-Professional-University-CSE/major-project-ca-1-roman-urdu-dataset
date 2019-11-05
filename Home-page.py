@@ -9,13 +9,13 @@ about_us.config(bg="White")
 
 
 win1 = Frame(about_us, bg="white")
-about_us.pack(side=LEFT)
+win1.pack(side=LEFT)
 
 win2= Frame(about_us, bg="white")
-about_us.pack(side=LEFT, pady=50)
+win2.pack(side=LEFT, pady=50)
 
 win3= Frame(about_us, bg="white")
-about_us.pack(side=LEFT, pady=50)
+win3.pack(side=LEFT, pady=50)
 
 img1 = PhotoImage(file="Subhadip.gif")
 img2 = PhotoImage(file="smaranika.gif")
@@ -44,7 +44,7 @@ Label(win2, bg="white").pack(anchor=NW, pady=40)
 
 Label(win2, text="Name: Mohammad Abuzar", font="Times", bg="white", fg="blue").pack(anchor=NW)
 Label(win2, text="Reg. No: 11702551", font="Times", bg="white", fg="blue").pack(anchor=NW)
-Label(win2, text="Roll No: A15, font="Times", bg="white", fg="blue").pack(anchor=NW)
+Label(win2, text="Roll No: A15", font="Times", bg="white", fg="blue").pack(anchor=NW)
 
 Label(win2, bg="white").pack(anchor=NW, pady=40)
 
