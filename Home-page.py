@@ -19,12 +19,13 @@ about_us.pack(side=LEFT, pady=50)
 
 img1 = PhotoImage(file="Subhadip.gif")
 img2 = PhotoImage(file="smaranika.gif")
-img3 = PhotoImage(file="amrita.gif")
-img4 = PhotoImage(file="abuzar.gif")
+img3 = PhotoImage(file="abuzar.gif")
+img4 = PhotoImage(file="amrita.gif")
 
 Label(win1, image=img1).pack(padx=50, pady=10)
 Label(win1, image=img2).pack(padx=50, pady=10)
 Label(win1, image=img3).pack(padx=50, pady=10)
+Label(win1, image=img4).pack(padx=50, pady=10)
 
 Label(win3, text="ABOUT US", font="Times", bg="white", fg="black").pack(anchor=NW)
 
