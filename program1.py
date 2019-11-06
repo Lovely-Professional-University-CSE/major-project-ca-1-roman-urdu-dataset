@@ -28,13 +28,15 @@ plt.legend()
 plt.ylabel('Number of examples')
 plt.title('Proportion of examples')
 plt.show()
-
+"""
 
 # label selection
 y=dataset.iloc[:,1].values
 labelEnocder_y=LabelEncoder()
 y=labelEnocder_y.fit_transform(y)
 # 3 postive 1 negative 2 nuetral
+"""
+y = dataset['sentiment']
 
 print(y)
 print(y.shape)
@@ -50,11 +52,14 @@ for i in range(0,len(y)):
     corpus.append(review)
 stopwords, len(stopwords)
 
-corpus
-
+"""
+#corpus
 cv=CountVectorizer(max_features=2500)
 x=cv.fit_transform(corpus).toarray()
 x=x[:14646]
+"""
+
+x = np.array(corpus)
 
 print(x.shape)
 print(x)
@@ -64,6 +69,10 @@ print(y)
 
 #split the data
 x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.20)
+from sklearn.feature_extraction.text import TfidfVectorizer
+vectorizer = TfidfVectorizer()
+x_train = vectorizer.fit_transform(x_train)
+x_test = vectorizer.transform(x_test)
 
 #classifier  for comparing the other classifier for accuracy
 classifier=LogisticRegression(random_state=0,solver='liblinear',multi_class='ovr')
@@ -112,7 +121,7 @@ print('Accuracy is {} '.format(accuracy_score(y_test, y_pred1)))
 #visualizing the confusion matrix for classifer1
 labels=['Positive','Neutral','Negative']
 fig = plt.figure()
-ax1 = fig.add_subplot(222)
+ax= fig.add_subplot(111)
 cax = ax.matshow(cm1)
 plt.title('Confusion matrix of the classifier1 \n')
 fig.colorbar(cax)
