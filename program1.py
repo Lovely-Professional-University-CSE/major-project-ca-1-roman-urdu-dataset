@@ -1,26 +1,30 @@
+'''
+Step 1: Importing all necessary modules
+'''
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.utils import shuffle
-from sklearn.preprocessing import LabelEncoder,OneHotEncoder
-# making corpus or words from comments
 import re
-from nltk.stem.porter import PorterStemmer
-import nltk
-from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
-dataset = pd.read_csv('Roman Urdu DataSet.csv', names=['Comment', 'sentiment', 'nan'])
+from nltk import word_tokenize
 
-print(dataset.head())
-print(dataset.shape)
+print('Wait Model is learning...')
+
+'''
+Step 2: Import Dataset
+'''
+dataset = pd.read_csv('Roman Urdu DataSet.csv', names=['comment', 'sentiment', 'nan'])
+
+'''
+Step 3: Lets have a look at our data set
+'''
 
 Pos = dataset[dataset['sentiment'] == 'Positive'].shape[0]
 Neg = dataset[dataset['sentiment'] == 'Negative'].shape[0]
 Neu = dataset[dataset['sentiment'] == 'Neutral'].shape[0]
-# bar plot of the 3 classes
 plt.bar(10,Pos,3, label="Positve")
 plt.bar(15,Neg,3, label="Negative")
 plt.bar(20,Neu,3, label="Neutral")
@@ -28,58 +32,102 @@ plt.legend()
 plt.ylabel('Number of examples')
 plt.title('Proportion of examples')
 plt.show()
-"""
 
-# label selection
-y=dataset.iloc[:,1].values
-labelEnocder_y=LabelEncoder()
-y=labelEnocder_y.fit_transform(y)
-# 3 postive 1 negative 2 nuetral
-"""
+'''
+Step 4: We have y in form of categorical data
+'''
 y = dataset['sentiment']
 
-print(y)
-print(y.shape)
-
-corpus=[]
+'''
+Step 5: Cleaning
+'''
+# created user defined stopwords
 stopwords=['ai', 'ayi', 'hy', 'hai', 'main', 'ki', 'tha', 'koi', 'ko', 'sy', 'woh', 'bhi', 'aur', 'wo', 'yeh', 'rha', 'hota', 'ho', 'ga', 'ka', 'le', 'lye', 'kr', 'kar', 'lye', 'liye', 'hotay', 'waisay', 'gya', 'gaya', 'kch', 'ab', 'thy', 'thay', 'houn', 'hain', 'han', 'to', 'is', 'hi', 'jo', 'kya', 'thi', 'se', 'pe', 'phr', 'wala', 'waisay', 'us', 'na', 'ny', 'hun', 'rha', 'raha', 'ja', 'rahay', 'abi', 'uski', 'ne', 'haan', 'acha', 'nai', 'sent', 'photo', 'you', 'kafi', 'gai', 'rhy', 'kuch', 'jata', 'aye', 'ya', 'dono', 'hoa', 'aese', 'de', 'wohi', 'jati', 'jb', 'krta', 'lg', 'rahi', 'hui', 'karna', 'krna', 'gi', 'hova', 'yehi', 'jana', 'jye', 'chal', 'mil', 'tu', 'hum', 'par', 'hay', 'kis', 'sb', 'gy', 'dain', 'krny', 'tou']
-for i in range(0,len(y)):
-    review = re.sub('[^a-zA-Z]',' ',str(dataset.iloc[:,0].values[i]))
-    review=review.lower()
-    review=review.split()
-    review=[word for word in review if not word in stopwords]
-    review=' '.join(review)
-    corpus.append(review)
-stopwords, len(stopwords)
 
-"""
-#corpus
-cv=CountVectorizer(max_features=2500)
-x=cv.fit_transform(corpus).toarray()
-x=x[:14646]
-"""
+def clean(x):
+    review_with_no_special_character = re.sub('[^a-zA-Z]',' ',str(x))
+    review_in_lowercase = review_with_no_special_character.lower()
+    review_in_tokens = word_tokenize(review_in_lowercase)
+    review_with_no_stopwords = [word for word in review_in_tokens if not word in stopwords]
+    review_in_sentence = ' '.join(review_with_no_stopwords)
+    return review_in_sentence
 
-x = np.array(corpus)
+dataset['comment'] = dataset['comment'].apply(lambda x:clean(x))
 
-print(x.shape)
-print(x)
+X = dataset['comment']
 
-print(y.shape)
-print(y)
+'''
+Step 6: Split data set into training and testing sets
+'''
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20)
 
-#split the data
-x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.20)
+'''
+Step 6: convert a collection of raw documents to a matrix
+'''
 from sklearn.feature_extraction.text import TfidfVectorizer
 vectorizer = TfidfVectorizer()
-x_train = vectorizer.fit_transform(x_train)
-x_test = vectorizer.transform(x_test)
+X_train_vector = vectorizer.fit_transform(X_train)
+X_test_vector = vectorizer.transform(X_test)
 
-#classifier  for comparing the other classifier for accuracy
+'''
+Step 8: Creating classifier and fitting data in classifier
+'''
+from sklearn.svm import SVC
+classifier = SVC(kernel='linear', C=1.0, degree=3, random_state=0)
+classifier.fit(X_train_vector, y_train)
+
+'''
+Step 9 : Pickling the Model
+'''
+import pickle
+#To reuse, we can dump the model and load whenever or where-ever you want. 
+#Vocabulary is also needed to vectorize the new documents while predicting the label.
+
+# pickling the vectorizer
+pickle.dump(vectorizer, open('vectorizer.sav', 'wb'))
+# pickling the model
+pickle.dump(classifier, open('classifier.sav', 'wb'))
+
+'''
+Step 9: Perform Prediction
+'''
+y_pred=classifier.predict(X_test_vector)
+
+'''
+Step 10: Create Confusion Matrix
+'''
+ConfusionMatrix=confusion_matrix(y_test, y_pred)
+
+'''
+Step 11: Evaluation
+'''
+
+Accuracy = format(classifier.score(X_test_vector, y_test)*100, '.2f')+ ' %'
+file = open('AccuracyPercentage', 'wb')
+pickle.dump(Accuracy, file)
+file.close()
+
+print('Learning end')
+
+#visualizing confusion matrix
+
+labels=['Positive','Neutral','Negative']
+fig = plt.figure()
+ax = fig.add_subplot(111)
+cax = ax.matshow(ConfusionMatrix)
+plt.title('Confusion matrix of the classifier \n')
+fig.colorbar(cax)
+ax.set_xticklabels([''] + labels)
+ax.set_yticklabels([''] + labels)
+plt.xlabel('Predicted')
+plt.ylabel('True')
+plt.show()
+"""
+#classifier1
 classifier=LogisticRegression(random_state=0,solver='liblinear',multi_class='ovr')
 classifier.fit(x_train,y_train)
 y_pred=classifier.predict(x_test)
 print(y_pred)
-
 
 #confusion matrix
 cm=confusion_matrix(y_test,y_pred)
@@ -101,32 +149,4 @@ plt.xlabel('Predicted')
 plt.ylabel('True')
 plt.show()
 
-# import support vector classifier 
-from sklearn.svm import SVC # Support Vector Classifier
-classifier1 = SVC(kernel='linear',random_state=0) 
-  
-# fitting x samples and y classes 
-classifier1.fit(x_train, y_train) 
-
-y_pred1=classifier1.predict(x_test)
-print(y_pred1)
-
-#confusion matrix
-cm1=confusion_matrix(y_test,y_pred1)
-print(cm1)
-
-#accuracy of SVM
-print('Accuracy is {} '.format(accuracy_score(y_test, y_pred1)))
-
-#visualizing the confusion matrix for classifer1
-labels=['Positive','Neutral','Negative']
-fig = plt.figure()
-ax= fig.add_subplot(111)
-cax = ax.matshow(cm1)
-plt.title('Confusion matrix of the classifier1 \n')
-fig.colorbar(cax)
-ax.set_xticklabels([''] + labels)
-ax.set_yticklabels([''] + labels)
-plt.xlabel('Predicted')
-plt.ylabel('True')
-plt.show()
+"""
