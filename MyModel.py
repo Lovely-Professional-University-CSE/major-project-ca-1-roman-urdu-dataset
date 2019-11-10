@@ -122,7 +122,7 @@ ax.set_yticklabels([''] + labels)
 plt.xlabel('Predicted')
 plt.ylabel('True')
 plt.show()
-"""
+'''
 #classifier1
 classifier=LogisticRegression(random_state=0,solver='liblinear',multi_class='ovr')
 classifier.fit(x_train,y_train)
@@ -149,4 +149,4 @@ plt.xlabel('Predicted')
 plt.ylabel('True')
 plt.show()
 
-"""
+'''
