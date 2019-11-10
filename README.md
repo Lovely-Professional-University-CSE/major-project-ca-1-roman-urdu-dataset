@@ -23,7 +23,7 @@ Looking at the data using functions like head,colunm,row,etc.
 
 ### Step 5: Cleaning or data Preprocessing
 
-Lets apply some cleaning on text, in code below we have only allowed English character no special characters are allowed and all text are converted to lower case and stopwords of roman urdu are deleted.
+Lets apply some cleaning on text, we have only allowed English character no special characters are allowed and all text are converted to lower case and stopwords of roman urdu are deleted.
 
 ### Step 6: Convert feature into vectorize form using TfidfVectorizer
 
@@ -45,3 +45,25 @@ Checking the accuracy scorce of the classifiers.
 Visualising the  matrix using the matplotlab libaray.
 
 <img src = "img/confusion_matrix.gif" width = 400 height = 400)>
+
+# Our Project Interface
+On running the program name “home.py” we will see this interface
+
+![Screenshot (104)](https://user-images.githubusercontent.com/44317938/68549428-becead80-041d-11ea-9e42-db8c0fb5e6ed.png)
+
+User can get the two interfaces. One is to check about the developer and other is to take comment or review as input.
+On clicking the button click to know about developer, user landed to the file called “about_us.py”. Interface is 
+
+![Screenshot (105)](https://user-images.githubusercontent.com/44317938/68549436-e45bb700-041d-11ea-91d2-3ea836295749.png)
+
+Then the user click the return to home page button and landed to the previous page.
+After that on clicking the button called “Take User Input”, they landed to the file called “PredictUserInput.py”. The user interface is like this
+
+![Screenshot (106)](https://user-images.githubusercontent.com/44317938/68549458-081efd00-041e-11ea-857b-55971ff0bd01.png)
+
+User can type their comment on the box and click the predict sentiment button to see the sentiment.
+
+![display sentiment](https://user-images.githubusercontent.com/44317938/68549469-1e2cbd80-041e-11ea-861d-196aeddce85c.JPG)
+
+They can use other buttons according to their requirements.
+Then click the EXIT button to exit from the program.
